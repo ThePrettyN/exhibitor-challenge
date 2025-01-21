@@ -67,7 +67,7 @@ The Exhibitor Registration Form is an Angular application that allows exhibitors
    ```
 2. Navigate to the project directory.
    ```bash
-   cd exhibitor-registration-form
+   cd exhibitor-challenge
    ```
 3. Install dependencies.
    ```bash
