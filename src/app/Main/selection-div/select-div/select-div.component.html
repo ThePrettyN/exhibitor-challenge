@@ -1,0 +1,55 @@
+<div class="select-div shadow">
+  <div class="section-part-div">
+    <label class="caption-label">Event selection</label>
+    <div>
+      <div class="form-check radio-div">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="company"
+          id="category1"
+          value="1"
+          (change)="changeCategory(1)"
+        />
+        <label class="form-check-label" for="category1"> FHA-Food & Beverage </label>
+      </div>
+      <div class="form-check radio-div">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="company"
+          id="category2"
+          value="2"
+          (change)="changeCategory(2)"
+        />
+        <label class="form-check-label" for="category2"> Prowine Singapore </label>
+      </div>
+    </div>
+  </div>
+  <div class="section-part-div">
+    <label class="caption-label">Company</label>
+    <label class="description-label">
+      If you are unable to find your company name, please approach our Exhibitor Team for assistance.
+    </label>
+    <div class="custom-dropdown">
+      <div class="dropdown-selected" (click)="toggleDropdown()">
+        {{ selectedCompany || 'Please Select' }}
+      </div>
+      <div class="dropdown-options" *ngIf="isOpen">
+        <div
+          *ngFor="let companyOption of companyOptions"
+          (click)="selectCompany(companyOption.name)"
+          [class.selected]="companyOption.name === selectedCompany"
+        >
+          {{ companyOption.name }}
+        </div>
+      </div>
+    </div>
+    <!-- <select class="form-select form-select-lg" #selectInput (change)="onSelectChange($event)">
+            <option>Please Select</option>
+            <option *ngFor="let companyOption of companyOptions" [value]="companyOption.name">
+                {{companyOption.name}}
+            </option>
+        </select> -->
+  </div>
+</div>

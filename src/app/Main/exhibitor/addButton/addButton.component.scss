@@ -1,0 +1,20 @@
+.addButtonDiv {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  padding-top: 32px;
+  padding-bottom: 32px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+.btn {
+  width: 100%;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: #ee4036;
+  color: white;
+}
+
+.btn:hover {
+  background-color: #f7682d;
+}

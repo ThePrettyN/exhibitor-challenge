@@ -1,0 +1,97 @@
+<div class="exhibitor-div" *ngIf="exhibitors.length !== 0">
+  <label>* All fields are mendatory</label>
+  <div class="exhibitorContainer">
+    <div *ngFor="let exhibitor of exhibitors; let i = index">
+      <div class="exhibitor shadow bg-body-tertiary rounded">
+        <div class="exhibitor-header">
+          <label class="header-left">Exhibitor #{{ i + 1 }}</label>
+          <div class="c-pointer header-right" (click)="deleteForm(i)">Remove</div>
+        </div>
+        <div class="exhibitor-body">
+          <form [formGroup]="exhibitor.group">
+            <div class="inputgroup">
+              <div class="inputgroup-text">Email Address</div>
+              <input type="email" class="form-control" formControlName="emailInput" />
+              <div
+                *ngIf="exhibitor.group.controls['emailInput'].invalid && exhibitor.group.controls['emailInput'].touched"
+                class="error"
+              >
+                <small>Please input a valid email</small>
+              </div>
+            </div>
+            <div class="inputgroup">
+              <div class="inputgroup-text">Name on Badge</div>
+              <input type="text" class="form-control" formControlName="nameOnBadgeInput" />
+              <div
+                *ngIf="
+                  exhibitor.group.controls['nameOnBadgeInput'].invalid &&
+                  exhibitor.group.controls['nameOnBadgeInput'].touched
+                "
+                class="error"
+              >
+                <small>Pelase input name on badge</small>
+              </div>
+            </div>
+            <div class="inputgroup">
+              <div class="inputgroup-text">Job Title</div>
+              <input type="text" class="form-control" formControlName="jobTitleInput" />
+              <div
+                *ngIf="
+                  exhibitor.group.controls['jobTitleInput'].invalid && exhibitor.group.controls['jobTitleInput'].touched
+                "
+                class="error"
+              >
+                <small>Please input job title</small>
+              </div>
+            </div>
+            <div class="inputgroup">
+              <label class="inputgroup-text">Country</label>
+              <div class="custom-dropdown">
+                <div class="dropdown-selected" (click)="toggleDropdown(i)">
+                  {{ exhibitor.country }}
+                </div>
+                <div class="dropdown-options" *ngIf="exhibitor.isOpen">
+                  <div
+                    *ngFor="let country of countries"
+                    (click)="selectCountry(i, country)"
+                    [class.selected]="country === exhibitor.country"
+                  >
+                    {{ country }}
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="exhibitor.country === '' && exhibitor.touched === true" class="error">
+                <small>Please select country</small>
+              </div>
+            </div>
+            <div class="inputgroup">
+              <div class="inputgroup-text">Company on Badge</div>
+              <input type="text" class="form-control" formControlName="companyOnBadgeInput" />
+              <div
+                *ngIf="
+                  exhibitor.group.controls['companyOnBadgeInput'].value === '' &&
+                  exhibitor.group.controls['companyOnBadgeInput'].touched
+                "
+                class="error"
+              >
+                <small>Please input company on badge</small>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-main-exhibitor-add [addFunction]="addForm"></app-main-exhibitor-add>
+  <hr class="margin--16" />
+  <app-main-exhibitor-button (click)="register()"></app-main-exhibitor-button>
+  <div class="modal" *ngIf="isVisible">
+    <div class="modal-content">
+      <h2 class="comment">Registration Completed</h2>
+      <p class="code-coment">Your unique code is</p>
+      <div class="code" #codeContainer>{{ code }}</div>
+      <button (click)="saveAsImage()" class="btn">Save as Image</button>
+      <button (click)="closeModal()" class="backbtn">Back to Home</button>
+    </div>
+  </div>
+</div>
