@@ -1,59 +1,107 @@
-# Project
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.7.
+# Exhibitor Registration Form
 
-## Development server
+## Overview
+The Exhibitor Registration Form is an Angular application that allows exhibitors to register their colleagues while onsite at an event. The form features a dynamic registration process, API integrations, validation requirements, and additional functionalities for user convenience.
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
-```
+## Features
+- **Dynamic Event and Company Selection**: Populate the Company dropdown list based on the selected event.
+- **Multi-Exhibitor Registration**:
+  - Add multiple Exhibitor cards dynamically.
+  - Remove existing Exhibitor cards.
+- **API Integration**:
+  - Fetch company lists using `/exhibitor-company-list` API.
+  - Register each exhibitor using `/add-exhibitor` API.
+- **Validation**:
+  - Ensure all fields are mandatory.
+  - Validate email addresses.
+  - Ensure at least one Exhibitor card is filled to complete registration.
+- **Error Handling**:
+  - Display API errors for invalid `S_company` entries in the corresponding Exhibitor card.
+- **Bonus Feature**:
+  - Save the modal as an image using a **Save as Image** button, including the generated unique five-letter code.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## Development Requirements
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Prerequisites
+1. **Angular Version**: 19.0.0
+2. **TypeScript**: Used throughout the application.
+3. **API Base URL**: `https://staging-fha-2024.occamlab.com.sg/api/`
+   - **CORS Protection**: API requests are restricted to `localhost:4200` origins.
 
-```bash
-ng generate component component-name
-```
+### API Endpoints
+1. **Fetch Company List**: `/exhibitor-company-list`
+   - Retrieves the list of companies for the dropdown.
+   - Note: Replace with mock data if connection is forbidden.
+2. **Register Exhibitor**: `/add-exhibitor`
+   - Accepts payload for individual exhibitor registration.
+   - Example Payload:
+     ```json
+     {
+       "S_event": "event_key",
+       "S_company": "company_key",
+       "name": "John Doe",
+       "email": "john.doe@example.com"
+     }
+     ```
+3. **Country List**: `https://staging-fha-2024.occamlab.com.sg/public/provinces.json`
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### Validation Requirements
+- **Mandatory Fields**: All fields in each Exhibitor card are required.
+- **Email Validation**: Only valid email addresses are accepted.
+- **Minimum Requirement**: At least one Exhibitor card must be present to proceed with registration.
+- **Error Handling**: Display API error messages directly in the affected Exhibitor card.
 
-```bash
-ng generate --help
-```
+---
 
-## Building
+## Development Instructions
 
-To build the project run:
+### Installation
+1. Clone the repository.
+   ```bash
+   git clone <repository_url>
+   ```
+2. Navigate to the project directory.
+   ```bash
+   cd exhibitor-registration-form
+   ```
+3. Install dependencies.
+   ```bash
+   npm install
+   ```
 
-```bash
-ng build
-```
+### Run the Application
+1. Start the development server.
+   ```bash
+   npm start
+   ```
+2. Access the application at `http://localhost:4200`.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### Testing
+To test the program, mock API responses may be required if the API connection is restricted.
 
-## Running unit tests
+---
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## Resources
+- **Figma Mockup**: [View the Mockup](http://stg.occamlab.com.sg/interview/exhibitor-reg-form_interview.fig)
+- **API Documentation**: Available via the provided endpoints.
+- **Country List**: [Download Here](https://staging-fha-2024.occamlab.com.sg/public/provinces.json)
 
-```bash
-ng test
-```
+---
 
-## Running end-to-end tests
+## Limitations
+- **CORS Restrictions**: API requests are only accepted from `localhost:4200`. Use mock data during development if needed.
+- **API Connectivity**: If `/exhibitor-company-list` API is inaccessible, the company list can be mocked locally for development purposes.
+- **Error Handling**: Errors are only triggered for invalid `S_company` values and displayed inline.
 
-For end-to-end (e2e) testing, run:
+---
 
-```bash
-ng e2e
-```
+## Bonus Feature Implementation
+- The **Save as Image** button enables users to save the modal as an image with the unique five-letter code.
+- This feature relies on client-side libraries for image generation (e.g., `html2canvas`).
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
